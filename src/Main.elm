@@ -1,6 +1,6 @@
 import Html exposing (Html, button, div, text, label, input)
 import Html.Events exposing (onClick, onInput)
-import Html.Attributes exposing (placeholder, value)
+import Html.Attributes exposing (placeholder, value, class, type_)
 
 main =
   Html.beginnerProgram { model = model, view = view, update = update }
@@ -43,8 +43,16 @@ update msg model =
 view: Model -> Html Msg
 
 view model =
-  div []
-    [ input [ value model.input, onInput InputChanged ] []
-      , button [ onClick Letter_Added ] [ text "Add" ]
-      , div [] [ text (toString model.letters) ]
+  div [ class "content" ]
+    [ div [class "inputs"]
+      [ input [ type_ "text", value model.input, onInput InputChanged ] []
+        , button [ class "button", onClick Letter_Added ] [ text "Add" ]
+      ]
+      , div [class "letters"] (List.map renderLetter model.letters)
     ]
+renderLetter: String -> Html Msg
+renderLetter letter =
+  div [ class "letter" ]
+  [
+    text letter
+  ]
