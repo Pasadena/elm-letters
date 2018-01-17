@@ -1,6 +1,6 @@
 import Html exposing (Html, button, div, text, label, input)
 import Html.Events exposing (onClick, onInput)
-import Html.Attributes exposing (placeholder)
+import Html.Attributes exposing (placeholder, value)
 
 main =
   Html.beginnerProgram { model = model, view = view, update = update }
@@ -30,7 +30,10 @@ update: Msg -> Model -> Model
 update msg model =
     case msg of
       Letter_Added ->
-        { model | letters = List.append model.letters [model.input] }
+        { model |
+          letters = List.append model.letters [model.input]
+          , input = ""
+        }
 
       InputChanged value ->
         { model | input = value }
@@ -41,7 +44,7 @@ view: Model -> Html Msg
 
 view model =
   div []
-    [ input [ onInput InputChanged ] []
+    [ input [ value model.input, onInput InputChanged ] []
       , button [ onClick Letter_Added ] [ text "Add" ]
       , div [] [ text (toString model.letters) ]
     ]
