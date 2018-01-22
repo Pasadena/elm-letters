@@ -26,8 +26,6 @@ input[type="text"] {
 }
 
 .content {
-  width: 100vw;
-  height: 100vh;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -58,4 +56,14 @@ input[type="text"] {
 .letter {
   padding: 8px;
   border: 0.5px solid black;
+}
+
+.words {
+  max-height: 400px;
+  overflow: auto;
+  width: 50%;
+}
+
+.word {
+  padding: 4px;
 }
