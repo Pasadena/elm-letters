@@ -51,17 +51,21 @@ input[type="text"] {
   font-size: 1.2em;
   font-weight: 700px;
   display: flex;
+  justify-content: center;
 }
 
 .letter {
   padding: 8px;
   border: 0.5px solid black;
+  margin: 5px;
 }
 
 .words {
   max-height: 400px;
   overflow: auto;
-  width: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .word {
