@@ -1,6 +1,7 @@
 import Html exposing (Html, button, div, text, label, input)
 import Html.Events exposing (onClick, onInput)
 import Html.Attributes exposing (placeholder, value, class, type_)
+import WordGenerator exposing (lettersToWords)
 
 main =
   Html.beginnerProgram { model = model, view = view, update = update }
@@ -32,6 +33,7 @@ update msg model =
       Letter_Added ->
         { model |
           letters = List.append model.letters [model.input]
+          , words = lettersToWords model.letters
           , input = ""
         }
 
