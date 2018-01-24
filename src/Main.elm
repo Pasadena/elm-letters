@@ -25,7 +25,7 @@ model =
 
 -- update
 
-type Msg = Letter_Added | InputChanged String
+type Msg = Letter_Added | Letter_Deleted Int | InputChanged String
 
 update: Msg -> Model -> Model
 update msg model =
@@ -42,6 +42,15 @@ update msg model =
 
       InputChanged value ->
         { model | input = value }
+
+      Letter_Deleted index ->
+        let
+          withoutLetter = List.append (List.take index model.letters) (List.drop (index +1) model.letters)
+        in
+          { model |
+            letters = withoutLetter
+            , words = lettersToWords withoutLetter
+          }
 
 -- view
 
@@ -64,12 +73,12 @@ renderLetterArea letters =
     [] -> div [] []
     _ -> div [] [
       h3 [] [ text "You've added these letters:" ]
-      , div [class "letters"] (List.map renderLetter letters)
+      , div [class "letters"] (List.indexedMap renderLetter letters)
     ]
 
-renderLetter: String -> Html Msg
-renderLetter letter =
-  div [ class "letter" ]
+renderLetter: Int -> String -> Html Msg
+renderLetter index letter =
+  div [ class "letter", onClick (Letter_Deleted index)]
   [
     text letter
   ]

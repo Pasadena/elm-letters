@@ -55,9 +55,19 @@ input[type="text"] {
 }
 
 .letter {
-  padding: 8px;
+  padding: 12px;
   border: 0.5px solid black;
   margin: 5px;
+}
+
+.letter:hover {
+  cursor: pointer;
+  background-color: #d60e0e;
+  color: white;
+  transition: 0.2s ease-in;
+  -webkit-transform: scale(1.1);
+  -ms-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .words {
