@@ -87,10 +87,22 @@ renderWords: List String -> Html Msg
 renderWords words =
   case words of
     [] -> div [] []
-    _ -> div [] [
-      h3 [] [ text "The generated words are: "]
-      , div [class "words"] (List.map renderWord (List.sort words))
-    ]
+    _ ->
+      let
+        sortedWords = List.sort words
+        amountOfItems = List.length sortedWords
+        isOddAmountOfWords = rem amountOfItems 2 == 0
+        middleIndex = if isOddAmountOfWords then (amountOfItems // 2) else (amountOfItems // 2) +1
+        firstSetOfWords = List.take middleIndex sortedWords
+        secondSetOfWords = List.drop (middleIndex) sortedWords
+      in
+        div [] [
+          h3 [] [ text "The generated words are: "]
+          , div [class "words"] [
+            div [class "words-column"] (List.map renderWord firstSetOfWords)
+            , div [class "words-column"] (List.map renderWord secondSetOfWords)
+          ]
+        ]
 
 renderWord: String -> Html Msg
 renderWord word =

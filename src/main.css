@@ -72,10 +72,16 @@ input[type="text"] {
 
 .words {
   max-height: 400px;
+  min-width: 400px;
   overflow: auto;
+  display: flex;
+}
+
+.words-column {
   display: flex;
   flex-direction: column;
   align-items: center;
+  flex-grow: 1;
 }
 
 .word {
